@@ -1,0 +1,55 @@
+<html>
+<head>
+    <title>Browse Patients</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/browse_patient">Patients</a>
+        <a href="/browse_doctor">Doctors</a>
+        <a href="/browse_nurse">Nurses</a>
+        <a href="/browse_office">Offices</a>
+        <a href="/browse_manager">Managers</a>
+	    <a href="/browse_assignment">Assignments</a>
+    </div>
+    <h3>{{resultText}}</h3>
+    <h3><a href='/add_new_patient'>Add new patient</a></h3>
+
+    <h3>Current Patients</h3>
+    <table border='1'>
+        <thead>
+            <th>ID</th>
+            <th>First</th>
+            <th>Last</th>
+            <th>Phone</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>ZIP</th>
+            <th>Birth Date</th>
+            <th>Weight</th>
+            <th>DoctorID</th>
+        </thead>
+        <tbody>
+        {% for patient in patients %}
+        <tr>
+            <td>{{ patient['id'] }}</td>
+            <td>{{ patient['fname'] }}</td>
+            <td>{{ patient['lname'] }}</td>
+            <td>{{ patient['phoneNumber'] }}</td>
+            <td>{{ patient['street'] }}</td>
+            <td>{{ patient['city'] }}</td>
+            <td>{{ patient['state'] }}</td>
+            <td>{{ patient['zip'] }}</td>
+            <td>{{ patient['dob'] }}</td>
+            <td>{{ patient['weight'] }}</td>
+            <td>{{ patient['doctorID'] }}</td>
+            <td> <input type='button' name='Update' value='Update'"> </td>
+            <td> <input type='button' name='Delete' value='Delete'> </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

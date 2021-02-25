@@ -1,0 +1,19 @@
+<h3>Add new patient:</h3>
+<form id="addpatient" action="/add_new_patient" method="post">
+    First: <input type="text" name="fname"><br>
+    Last: <input type="text" name="lname"><br>
+    Phone: <input type="text" name="phoneNumber"><br>
+    Street: <input type="text" name="street"><br>
+    City: <input type="text" name="city"><br>
+    State: <input type="text" name="state"><br>
+    Zip: <input type="text" name="zip"><br>
+    Birth Date: <input type="date" name="dob"><br>
+    Weight: <input type="number" name="weight"><br>
+    Doctor: <select name="doctorID">
+        {% for doctor in doctors %}
+          <option value="{{ doctor['id'] }}">{{ doctor['fname'] }} {{ doctor['lname'] }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Submit">
+ </form>
+<br/>

@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Browse Offices</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/browse_patient">Patients</a>
+        <a href="/browse_doctor">Doctors</a>
+        <a href="/browse_nurse">Nurses</a>
+        <a href="/browse_office">Offices</a>
+        <a href="/browse_manager">Managers</a>
+	    <a href="/browse_assignment">Assignments</a>
+    </div>
+    <h3>{{resultText}}</h3>
+    <h3><a href='/add_new_office'>Add new office</a></h3>
+
+    <h3>Current Offices</h3>
+    <table border='1'>
+        <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>ZIP</th>
+            <th>ManagerID</th>
+        </thead>
+        <tbody>
+        {% for office in offices %}
+        <tr>
+            <td>{{ office['id'] }}</td>
+            <td>{{ office['name'] }}</td>
+            <td>{{ office['phoneNumber'] }}</td>
+            <td>{{ office['street'] }}</td>
+            <td>{{ office['city'] }}</td>
+            <td>{{ office['state'] }}</td>
+            <td>{{ office['zip'] }}</td>
+            <td>{{ office['managerID'] }}</td>
+            <td> <input type='button' name='Update' value='Update'"> </td>
+            <td> <input type='button' name='Delete' value='Delete'> </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

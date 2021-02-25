@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>Browse Nurses</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/browse_patient">Patients</a>
+        <a href="/browse_doctor">Doctors</a>
+        <a href="/browse_nurse">Nurses</a>
+        <a href="/browse_office">Offices</a>
+        <a href="/browse_manager">Managers</a>
+	    <a href="/browse_assignment">Assignments</a>
+    </div>
+    <h3>{{resultText}}</h3>
+    <h3><a href='/add_new_nurse'>Add new nurse</a></h3>
+
+    <h3>Current Nurses</h3>
+    <table border='1'>
+        <thead>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Salary</th>
+        </thead>
+        <tbody>
+        {% for nurse in nurses %}
+        <tr>
+            <td>{{ nurse['id'] }}</td>
+            <td>{{ nurse['fname'] }}</td>
+            <td>{{ nurse['lname'] }}</td>
+            <td>{{ nurse['phoneNumber'] }}</td>
+            <td>{{ nurse['salary'] }}</td>
+            <td> <input type='button' name='Update' value='Update'"> </td>
+            <td> <input type='button' name='Delete' value='Delete'> </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

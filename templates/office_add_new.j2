@@ -1,0 +1,16 @@
+<h3>Add new office:</h3>
+<form id="addoffice" action="/add_new_office" method="post">
+    Name: <input type="text" name="name"><br>
+    Phone: <input type="text" name="phoneNumber"><br>
+    Street: <input type="text" name="street"><br>
+    City: <input type="text" name="city"><br>
+    State: <input type="text" name="state"><br>
+    Zip: <input type="text" name="zip"><br>
+    Manager: <select name="managerID">
+        {% for manager in managers %}
+          <option value="{{ manager['id'] }}">{{ manager['fname'] }} {{ manager['lname'] }}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" value="Submit">
+ </form>
+<br/>
