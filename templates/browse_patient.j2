@@ -29,7 +29,7 @@
             <th>ZIP</th>
             <th>Birth Date</th>
             <th>Weight</th>
-            <th>DoctorID</th>
+            <th>Doctor</th>
         </thead>
         <tbody>
         {% for patient in patients %}
@@ -44,7 +44,7 @@
             <td>{{ patient['zip'] }}</td>
             <td>{{ patient['dob'] }}</td>
             <td>{{ patient['weight'] }}</td>
-            <td>{{ patient['doctorID'] }}</td>
+            <td>{{ patient['doctor.fname'] + " " +  patient['doctor.lname']}}</td>
             <td> <input type='button' name='Update' value='Update'"> </td>
             <td> <input type='button' name='Delete' value='Delete'> </td>
         </tr>

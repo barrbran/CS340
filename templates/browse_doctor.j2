@@ -24,7 +24,7 @@
             <th>Last Name</th>
             <th>Phone</th>
             <th>Salary</th>
-            <th>NurseID</th>
+            <th>Nurse</th>
         </thead>
         <tbody>
         {% for doctor in doctors %}
@@ -34,7 +34,7 @@
             <td>{{ doctor['lname'] }}</td>
             <td>{{ doctor['phoneNumber'] }}</td>
             <td>{{ doctor['salary'] }}</td>
-            <td>{{ doctor['nurseID'] }}</td>
+            <td>{{ doctor['nurse.fname'] + " " + doctor['nurse.lname']}}</td>
             <td> <input type='button' name='Update' value='Update'"> </td>
             <td> <input type='button' name='Delete' value='Delete'> </td>
         </tr>

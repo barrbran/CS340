@@ -18,7 +18,8 @@ def root():
 
 @app.route('/browse_doctor')
 def doctor():
-    query = "SELECT id, fname, lname, phoneNumber, salary, nurseID FROM doctor;"
+    #query = "SELECT id, fname, lname, phoneNumber, salary, nurseID FROM doctor;"
+    query = "SELECT doctor.id, doctor.fname, doctor.lname, doctor.phoneNumber, doctor.salary, nurse.fname, nurse.lname FROM doctor LEFT JOIN nurse ON doctor.nurseID = nurse.id;"
     result = db.execute_query(db_connection, query).fetchall()
     print(result)
     return render_template("browse_doctor.j2", doctors=result)
@@ -76,7 +77,8 @@ def add_new_nurse():
 
 @app.route('/browse_office')
 def office():
-    query = "SELECT id, name, phoneNumber, street, city, state, zip, managerID FROM office;"
+    
+    query = "SELECT office.id, office.name, office.phoneNumber, office.street, office.city, office.state, office.zip, manager.fname, manager.lname FROM office INNER JOIN manager ON office.managerID = manager.id;"
     result = db.execute_query(db_connection, query).fetchall()
     print(result)
     return render_template("browse_office.j2", offices=result)
@@ -108,7 +110,8 @@ def add_new_office():
 
 @app.route('/browse_patient')
 def patient():
-    query = "SELECT id, fname, lname, phoneNumber, street, city, state, zip, dob, weight, doctorID FROM patient;"
+    
+    query = "SELECT patient.id, patient.fname, patient.lname, patient.phoneNumber, patient.street, patient.city, patient.state, patient.zip, patient.dob, patient.weight, doctor.fname, doctor.lname FROM patient LEFT JOIN doctor ON patient.doctorID = doctor.id;"
     result = db.execute_query(db_connection, query).fetchall()
     print(result)
     return render_template("browse_patient.j2", patients=result)
