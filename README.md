@@ -1,2 +1,1 @@
-# flasktut
-Flask Tutorial
+# CS340 project
