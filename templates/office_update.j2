@@ -1,3 +1,19 @@
+<html>
+<head>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body> 
+<div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/search">Search</a>
+        <a href="/browse_patient">Patients</a>
+        <a href="/browse_doctor">Doctors</a>
+        <a href="/browse_nurse">Nurses</a>
+        <a href="/browse_office">Offices</a>
+        <a href="/browse_manager">Managers</a>
+	    <a href="/browse_assignment">Assignments</a>
+    </div>
+
 <h3>Update office:</h3>
 <form id="update_office" action="/update_office/{{office['id']}}" method="post">
 <input type="hidden" name="office_id" value="{{ office['id'] }}">
@@ -15,3 +31,5 @@ Manager: <select name="managerID">
 <input type="submit" value="Submit">
 </form>
 <br/>
+</body> 
+</html>
