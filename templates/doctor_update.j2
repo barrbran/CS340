@@ -1,0 +1,15 @@
+<h3>Update doctor:</h3>
+<form id="update_doctor" action="/update_doctor/{{doctor['id']}}" method="post">
+<input type="hidden" name="doctor_id" value="{{ doctor['id'] }}">
+First name: <input type="text" name="fname" value="{{ doctor['fname'] }}"><br>
+Last name: <input type="text" name="lname" value="{{ doctor['lname'] }}"><br>
+Phone Number: <input type="text" name="phoneNumber" value="{{ doctor['phoneNumber'] }}"><br>
+Salary: <input type="number" name="salary" value="{{ doctor['salary'] }}"><br>
+Nurse: <select name="nurseID">
+            {% for nurse in nurses %}
+                <option value="{{ nurse['id'] }}">{{ nurse['fname'] }} {{ nurse['lname'] }}</option>
+            {% endfor %}
+        </select>
+<input type="submit" value="Submit">
+</form>
+<br/>

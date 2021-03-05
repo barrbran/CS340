@@ -1,0 +1,10 @@
+<h3>Update manager:</h3>
+<form id="update_manager" action="/update_manager/{{manager['id']}}" method="post">
+<input type="hidden" name="manager_id" value="{{ manager['id'] }}">
+First name: <input type="text" name="fname" value="{{ manager['fname'] }}"><br>
+Last name: <input type="text" name="lname" value="{{ manager['lname'] }}"><br>
+Phone Number: <input type="text" name="phoneNumber" value="{{ manager['phoneNumber'] }}"><br>
+Salary: <input type="number" name="salary" value="{{ manager['salary'] }}"><br>
+<input type="submit" value="Submit">
+</form>
+<br/>

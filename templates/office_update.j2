@@ -1,0 +1,17 @@
+<h3>Update office:</h3>
+<form id="update_office" action="/update_office/{{office['id']}}" method="post">
+<input type="hidden" name="office_id" value="{{ office['id'] }}">
+Name: <input type="text" name="name" value="{{ office['name'] }}"><br>
+Phone Number: <input type="text" name="phoneNumber" value="{{ office['phoneNumber'] }}"><br>
+Street: <input type="text" name="street" value="{{ office['street'] }}"><br>
+City: <input type="text" name="city" value="{{ office['city'] }}"><br>
+State: <input type="text" name="state" value="{{ office['state'] }}"><br>
+Zip: <input type="text" name="zip" value="{{ office['zip'] }}"><br>
+Manager: <select name="managerID">
+            {% for manager in managers %}
+                <option value="{{ manager['id'] }}">{{ manager['fname'] }} {{ manager['lname'] }}</option>
+            {% endfor %}
+        </select>
+<input type="submit" value="Submit">
+</form>
+<br/>

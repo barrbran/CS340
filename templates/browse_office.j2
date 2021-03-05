@@ -38,9 +38,9 @@
             <td>{{ office['city'] }}</td>
             <td>{{ office['state'] }}</td>
             <td>{{ office['zip'] }}</td>
-            <td>{{ office['managerID'] }}</td>
-            <td> <input type='button' name='Update' value='Update'"> </td>
-            <td> <input type='button' name='Delete' value='Delete'> </td>
+            <td>{{ office['fname'] + " " + office['lname'] }}</td>
+            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_office/{{ office['id'] }}'"> </td>
+            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_office/{{ office['id'] }}'"> </td>
         </tr>
         {% endfor %}
         </tbody>

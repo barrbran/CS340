@@ -33,8 +33,8 @@
             <td>{{ nurse['lname'] }}</td>
             <td>{{ nurse['phoneNumber'] }}</td>
             <td>{{ nurse['salary'] }}</td>
-            <td> <input type='button' name='Update' value='Update'"> </td>
-            <td> <input type='button' name='Delete' value='Delete'> </td>
+            <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_nurse/{{ nurse['id'] }}'"> </td>
+            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_nurse/{{ nurse['id'] }}'"> </td>
         </tr>
         {% endfor %}
         </tbody>
