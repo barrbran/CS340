@@ -16,6 +16,24 @@ app = Flask(__name__)
 def root():
     return render_template("main.j2")
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == "POST":
+        doctor = request.form['doctor']
+       
+        query = "SELECT * from doctor WHERE fname LIKE %s OR lname LIKE %s;"
+        data = (doctor, doctor)
+        result = db.execute_query(db_connection, query, data).fetchall()
+        
+        
+        if len(data) == 0: 
+            query = "SELECT * FROM doctor;"
+            data = (doctor, doctor)
+            result = db.execute_query(db_connection, query, data).fetchall()
+            
+        return render_template('search.j2', search=result)
+    return render_template('search.j2')
+
 @app.route('/browse_doctor')
 def doctor():
     db_connection = db.connect_to_database()
