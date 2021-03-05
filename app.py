@@ -34,6 +34,52 @@ def search():
         return render_template('search.j2', search=result)
     return render_template('search.j2')
 
+
+@app.route('/browse_assignment')
+def assignment():
+    db_connection = db.connect_to_database()
+    query = "SELECT officedoctor.id, officedoctor.doctorID, officedoctor.officeID, doctor.fname, doctor.lname, office.name FROM officedoctor INNER JOIN doctor ON officedoctor.doctorID = doctor.id INNER JOIN office ON officedoctor.officeID = office.id;"
+    result = db.execute_query(db_connection, query).fetchall()
+    print(result)
+    return render_template("browse_assignment.j2", assignments=result)
+
+@app.route('/add_assignment', methods=['POST','GET'])
+def add_new_assignment():
+    db_connection = db.connect_to_database()
+    if request.method == 'GET':
+        query = 'SELECT doctor.id, doctor.fname, doctor.lname FROM doctor;'
+        result = db.execute_query(db_connection, query).fetchall()
+        print(result)
+
+        query = 'SELECT office.id, office.name FROM office;'
+        result2 = db.execute_query(db_connection, query).fetchall()
+        print(result2)
+        return render_template('assignment_add_new.j2', doctors=result, offices=result2)
+
+    elif request.method == 'POST':
+        print("Add assignment")
+        doctorID = request.form['doctorID']
+        officeID = request.form['officeID']
+        
+        query = 'INSERT INTO officedoctor (doctorID, officeID) VALUES (%s,%s);'
+        data = (doctorID, officeID)
+        db.execute_query(db_connection, query, data)
+
+        query = "SELECT officedoctor.id, officedoctor.doctorID, officedoctor.officeID, doctor.fname, doctor.lname, office.name FROM officedoctor INNER JOIN doctor ON officedoctor.doctorID = doctor.id INNER JOIN office ON officedoctor.officeID = office.id;"
+        result = db.execute_query(db_connection, query).fetchall()
+        print(result)
+        return render_template("browse_assignment.j2", assignments=result, resultText = "Assignment added.")
+
+@app.route('/delete_assignment/<int:id>')
+def delete_assignment(id):
+    db_connection = db.connect_to_database()
+    query = "DELETE FROM officedoctor WHERE id = %s"
+    data = (id,)
+    result = db.execute_query(db_connection, query, data)
+    print(str(result.rowcount) + " row(s) updated")
+    return redirect('/browse_assignment')
+
+
 @app.route('/browse_doctor')
 def doctor():
     db_connection = db.connect_to_database()
