@@ -73,7 +73,7 @@ def add_new_assignment():
 @app.route('/delete_assignment/<int:id>')
 def delete_assignment(id):
     db_connection = db.connect_to_database()
-    query = "DELETE FROM officedoctor WHERE id = %s"
+    query = "DELETE FROM officedoctor WHERE doctorID = %s"
     data = (id,)
     result = db.execute_query(db_connection, query, data)
     print(str(result.rowcount) + " row(s) updated")
