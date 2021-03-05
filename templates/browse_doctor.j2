@@ -24,7 +24,7 @@
             <th>Last Name</th>
             <th>Phone</th>
             <th>Salary</th>
-            <th>NurseID</th>
+            <th>Nurse</th>
         </thead>
         <tbody>
         {% for doctor in doctors %}
@@ -34,7 +34,11 @@
             <td>{{ doctor['lname'] }}</td>
             <td>{{ doctor['phoneNumber'] }}</td>
             <td>{{ doctor['salary'] }}</td>
-            <td>{{ doctor['nurse.fname'] + " " + doctor['nurse.lname'] }}</td>
+            {% if not doctor['nurse.fname'] %}
+                <td>None</td>
+            {% else %}
+                <td>{{ doctor['nurse.fname'] + " " + doctor['nurse.lname']}}</td>
+            {% endif %}
             <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_doctor/{{ doctor['id'] }}'"> </td>
             <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_doctor/{{ doctor['id'] }}'"> </td>
         </tr>

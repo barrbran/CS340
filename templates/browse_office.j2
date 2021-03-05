@@ -26,7 +26,7 @@
             <th>City</th>
             <th>State</th>
             <th>ZIP</th>
-            <th>ManagerID</th>
+            <th>Manager</th>
         </thead>
         <tbody>
         {% for office in offices %}
@@ -38,7 +38,11 @@
             <td>{{ office['city'] }}</td>
             <td>{{ office['state'] }}</td>
             <td>{{ office['zip'] }}</td>
-            <td>{{ office['fname'] + " " + office['lname'] }}</td>
+            {% if not office['fname'] %}
+                <td>None</td>
+            {% else %}
+                <td>{{ office['fname'] + " " + office['lname']}}</td>
+            {% endif %}
             <td> <input type='button' name='Update' value='Update' onclick="window.location = '/update_office/{{ office['id'] }}'"> </td>
             <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_office/{{ office['id'] }}'"> </td>
         </tr>
