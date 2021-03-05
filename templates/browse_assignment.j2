@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>Browse Assignments</title>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body>
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/search">Search</a>
+        <a href="/browse_patient">Patients</a>
+        <a href="/browse_doctor">Doctors</a>
+        <a href="/browse_nurse">Nurses</a>
+        <a href="/browse_office">Offices</a>
+        <a href="/browse_manager">Managers</a>
+	    <a href="/browse_assignment">Assignments</a>
+    </div>
+    <h3>{{resultText}}</h3>
+    <h3><a href='/add_assignment'>Add assignment</a></h3>
+
+    <h3>Current Assignments</h3>
+    <table border='1'>
+        <thead>
+            <th>Doctor ID</th>
+            <th>Doctor</th>
+            <th>Office ID</th>
+            <th>Office</th>
+        </thead>
+        <tbody>
+        {% for officedoctor in assignments %}
+        <tr>
+            <td>{{ officedoctor['doctorID'] }}</td>
+            <td>{{ officedoctor['fname'] + " " + officedoctor['lname'] }}</td>
+            <td>{{ officedoctor['officeID'] }}</td>
+            <td>{{ officedoctor['name'] }}</td>
+            
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
