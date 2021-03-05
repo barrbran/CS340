@@ -32,7 +32,7 @@
             <td>{{ officedoctor['fname'] + " " + officedoctor['lname'] }}</td>
             <td>{{ officedoctor['officeID'] }}</td>
             <td>{{ officedoctor['name'] }}</td>
-            
+            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_assignment/{{ officedoctor['doctorID'] }}'"> </td>
         </tr>
         {% endfor %}
         </tbody>
