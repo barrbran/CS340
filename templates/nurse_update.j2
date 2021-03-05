@@ -1,3 +1,19 @@
+<html>
+<head>
+    <link rel="stylesheet" href="static/css/main.css">
+</head>
+<body> 
+<div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/search">Search</a>
+        <a href="/browse_patient">Patients</a>
+        <a href="/browse_doctor">Doctors</a>
+        <a href="/browse_nurse">Nurses</a>
+        <a href="/browse_office">Offices</a>
+        <a href="/browse_manager">Managers</a>
+	    <a href="/browse_assignment">Assignments</a>
+    </div>
+
 <h3>Update nurse:</h3>
 <form id="update_nurse" action="/update_nurse/{{nurse['id']}}" method="post">
 <input type="hidden" name="nurse_id" value="{{ nurse['id'] }}">
@@ -8,3 +24,5 @@ Salary: <input type="number" name="salary" value="{{ nurse['salary'] }}"><br>
 <input type="submit" value="Submit">
 </form>
 <br/>
+</body> 
+</html>
