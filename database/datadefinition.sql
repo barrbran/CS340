@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2021 at 03:39 AM
+-- Generation Time: Mar 05, 2021 at 04:36 AM
 -- Server version: 10.4.17-MariaDB-log
 -- PHP Version: 7.4.13
 
@@ -33,7 +33,7 @@ CREATE TABLE `doctor` (
   `lname` varchar(255) NOT NULL,
   `phoneNumber` varchar(255) NOT NULL,
   `salary` int(11) NOT NULL,
-  `nurseID` int(11) NOT NULL
+  `nurseID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -153,7 +153,7 @@ CREATE TABLE `patient` (
   `zip` int(11) NOT NULL,
   `dob` date NOT NULL,
   `weight` int(11) NOT NULL,
-  `doctorID` int(11) NOT NULL
+  `doctorID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -252,26 +252,26 @@ ALTER TABLE `patient`
 -- Constraints for table `doctor`
 --
 ALTER TABLE `doctor`
-  ADD CONSTRAINT `doctor_fk_1` FOREIGN KEY (`nurseID`) REFERENCES `nurse` (`id`);
+  ADD CONSTRAINT `doctor_fk_1` FOREIGN KEY (`nurseID`) REFERENCES `nurse` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `office`
 --
 ALTER TABLE `office`
-  ADD CONSTRAINT `office_fk_1` FOREIGN KEY (`managerID`) REFERENCES `manager` (`id`);
+  ADD CONSTRAINT `office_fk_1` FOREIGN KEY (`managerID`) REFERENCES `manager` (`id`) ON DELETE SET NULL;
 
 --
 -- Constraints for table `officedoctor`
 --
 ALTER TABLE `officedoctor`
-  ADD CONSTRAINT `assignment_fk_1` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`id`),
-  ADD CONSTRAINT `assignment_fk_2` FOREIGN KEY (`officeID`) REFERENCES `office` (`id`);
+  ADD CONSTRAINT `assignment_fk_1` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `assignment_fk_2` FOREIGN KEY (`officeID`) REFERENCES `office` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `patient`
 --
 ALTER TABLE `patient`
-  ADD CONSTRAINT `patient_fk_1` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`id`);
+  ADD CONSTRAINT `patient_fk_1` FOREIGN KEY (`doctorID`) REFERENCES `doctor` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
