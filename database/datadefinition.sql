@@ -199,8 +199,12 @@ ALTER TABLE `office`
 --
 -- Indexes for table `officedoctor`
 --
-ALTER TABLE `officedoctor`
-  ADD PRIMARY KEY (`officeID`,`doctorID`),
+--ALTER TABLE `officedoctor`
+--  ADD PRIMARY KEY (`officeID`,`doctorID`),
+--  ADD KEY `assignment_fk_1` (`doctorID`);
+  
+ ALTER TABLE `officedoctor`
+  ADD PRIMARY KEY (`id`,`officeID`,`doctorID`),
   ADD KEY `assignment_fk_1` (`doctorID`);
 
 --
