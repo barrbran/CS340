@@ -28,11 +28,12 @@
         <tbody>
         {% for officedoctor in assignments %}
         <tr>
+	    <td>{{ officedoctor['id'] }}</td>
             <td>{{ officedoctor['doctorID'] }}</td>
             <td>{{ officedoctor['fname'] + " " + officedoctor['lname'] }}</td>
             <td>{{ officedoctor['officeID'] }}</td>
             <td>{{ officedoctor['name'] }}</td>
-            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_assignment/{{ officedoctor['doctorID'] }}'"> </td>
+            <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_assignment/{{ officedoctor['id'] }}'"> </td>
         </tr>
         {% endfor %}
         </tbody>
