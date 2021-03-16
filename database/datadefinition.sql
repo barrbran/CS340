@@ -134,7 +134,7 @@ CREATE TABLE `officedoctor` (
 -- Dumping data for table `officedoctor`
 --
 
-INSERT INTO `officedoctor` (`officeID`, `doctorID`) VALUES
+INSERT INTO `officedoctor` (`id`, `officeID`, `doctorID`) VALUES
 (1, 1, 1);
 
 -- --------------------------------------------------------
