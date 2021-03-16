@@ -125,6 +125,7 @@ INSERT INTO `office` (`id`, `name`, `phoneNumber`, `street`, `city`, `state`, `z
 --
 
 CREATE TABLE `officedoctor` (
+  `id` int(11) NOT NULL,
   `officeID` int(11) NOT NULL,
   `doctorID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -134,7 +135,7 @@ CREATE TABLE `officedoctor` (
 --
 
 INSERT INTO `officedoctor` (`officeID`, `doctorID`) VALUES
-(1, 1);
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -223,6 +224,10 @@ ALTER TABLE `patient`
 --
 ALTER TABLE `doctor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  
+ -- AUTO_INCREMENT for table `officedoctor` 
+ ALTER TABLE `officedoctor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `manager`
