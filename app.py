@@ -146,7 +146,6 @@ def delete_assignment(id):
     print(str(result.rowcount) + " row(s) updated")
     return redirect('/browse_assignment')
 
-
 @app.route('/browse_doctor')
 def doctor():
     db_connection = db.connect_to_database()
