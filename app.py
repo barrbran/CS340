@@ -16,12 +16,13 @@ app = Flask(__name__)
 def root():
     return render_template("main.j2")
 
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/search_doctor', methods=['GET', 'POST'])
 def search():
     if request.method == "POST":
         doctor = request.form['doctor']
        
-        query = "SELECT * from doctor WHERE fname LIKE %s OR lname LIKE %s;"
+        #query = "SELECT * from doctor WHERE fname LIKE %s OR lname LIKE %s;"
+        query = "SELECT doctor.id, doctor.fname, doctor.lname, doctor.phoneNumber, doctor.salary, nurse.fname, nurse.lname FROM doctor LEFT JOIN nurse ON doctor.nurseID = nurse.id WHERE doctor.fname LIKE %s OR doctor.lname LIKE %s;"
         data = (doctor, doctor)
         result = db.execute_query(db_connection, query, data).fetchall()
         
@@ -31,8 +32,8 @@ def search():
             data = (doctor, doctor)
             result = db.execute_query(db_connection, query, data).fetchall()
             
-        return render_template('search.j2', search=result)
-    return render_template('search.j2')
+        return render_template('search_doctor.j2', search=result)
+    return render_template('search_doctor.j2')
 
 
 @app.route('/browse_assignment')
