@@ -17,7 +17,8 @@ def root():
     return render_template("main.j2")
 
 @app.route('/search_doctor', methods=['GET', 'POST'])
-def search():
+def search_doctor():
+    db_connection = db.connect_to_database()
     if request.method == "POST":
         doctor = request.form['doctor']
        
@@ -25,7 +26,6 @@ def search():
         query = "SELECT doctor.id, doctor.fname, doctor.lname, doctor.phoneNumber, doctor.salary, nurse.fname, nurse.lname FROM doctor LEFT JOIN nurse ON doctor.nurseID = nurse.id WHERE doctor.fname LIKE %s OR doctor.lname LIKE %s;"
         data = (doctor, doctor)
         result = db.execute_query(db_connection, query, data).fetchall()
-        
         
         if len(data) == 0: 
             query = "SELECT * FROM doctor;"
@@ -35,6 +35,25 @@ def search():
         return render_template('search_doctor.j2', search=result)
     return render_template('search_doctor.j2')
 
+@app.route('/search_nurse', methods=['GET', 'POST'])
+def search_nurse():
+    db_connection = db.connect_to_database()
+    if request.method == "POST":
+        nurse = request.form['nurse']
+       
+        #query = "SELECT * from doctor WHERE fname LIKE %s OR lname LIKE %s;"
+        
+        query = "SELECT * from nurse WHERE nurse.fname LIKE %s OR nurse.lname LIKE %s;"
+        data = (nurse, nurse)
+        result = db.execute_query(db_connection, query, data).fetchall()
+        
+        if len(data) == 0: 
+            query = "SELECT * FROM nurse;"
+            data = (nurse, nurse)
+            result = db.execute_query(db_connection, query, data).fetchall()
+            
+        return render_template('search_nurse.j2', search=result)
+    return render_template('search_nurse.j2')
 
 @app.route('/browse_assignment')
 def assignment():
