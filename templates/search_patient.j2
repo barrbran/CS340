@@ -1,9 +1,41 @@
+<!-- Search Bar -->
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Browse Patients</title>
+    <head>
     <link rel="stylesheet" href="static/css/main.css">
-</head>
-<body>
+        
+        <style>
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+button {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: #8e969c;
+  color: white;
+  font-size: 14px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #69747e;
+}
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
+    </head>
+    <body>
+
     <div class="topnav">
         <a class="active" href="/">Home</a>
         <a href="/browse_patient">Patients</a>
@@ -13,12 +45,18 @@
         <a href="/browse_manager">Managers</a>
 	    <a href="/browse_assignment">Assignments</a>
     </div>
-    <h3>{{resultText}}</h3>
-    <h3><a href='/add_new_patient'>Add new patient</a></h3>
-    <h3><a href='/search_patient'>Search for a patient</a></h3>
 
-    <h3>Current Patients</h3>
-    <table border='1'>
+        <h1><center>Patient Search</center></h1>
+        <form class="example" method="post" action="/search_patient"
+        style="margin:auto;max-width:700px">
+            <input type="text" placeholder="Search by first or last name" name="patient">
+            <button>submit
+            </button type="submit">
+
+        </form>
+        <p></p>
+        <center>
+        <table border>
         <thead>
             <th>ID</th>
             <th>First</th>
@@ -32,8 +70,8 @@
             <th>Weight</th>
             <th>Doctor</th>
         </thead>
-        <tbody>
-        {% for patient in patients %}
+            
+        {% for patient in search %}
         <tr>
             <td>{{ patient['id'] }}</td>
             <td>{{ patient['fname'] }}</td>
@@ -54,7 +92,8 @@
             <td> <input type='button' name='Delete' value='Delete' onclick="window.location = '/delete_patient/{{ patient['id'] }}'"> </td>
         </tr>
         {% endfor %}
-        </tbody>
-    </table>
-</body>
+        </table>
+        </center>
+    
+    </body>
 </html>
