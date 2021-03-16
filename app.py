@@ -21,8 +21,6 @@ def search_doctor():
     db_connection = db.connect_to_database()
     if request.method == "POST":
         doctor = request.form['doctor']
-       
-        #query = "SELECT * from doctor WHERE fname LIKE %s OR lname LIKE %s;"
         query = "SELECT doctor.id, doctor.fname, doctor.lname, doctor.phoneNumber, doctor.salary, nurse.fname, nurse.lname FROM doctor LEFT JOIN nurse ON doctor.nurseID = nurse.id WHERE doctor.fname LIKE %s OR doctor.lname LIKE %s;"
         data = (doctor, doctor)
         result = db.execute_query(db_connection, query, data).fetchall()
@@ -52,6 +50,23 @@ def search_nurse():
         return render_template('search_nurse.j2', search=result)
     return render_template('search_nurse.j2')
 
+@app.route('/search_manager', methods=['GET', 'POST'])
+def search_manager():
+    db_connection = db.connect_to_database()
+    if request.method == "POST":
+        manager = request.form['manager']
+        query = "SELECT * from manager WHERE manager.fname LIKE %s OR manager.lname LIKE %s;"
+        data = (manager, manager)
+        result = db.execute_query(db_connection, query, data).fetchall()
+        
+        if len(data) == 0: 
+            query = "SELECT * FROM manager;"
+            data = (manager, manager)
+            result = db.execute_query(db_connection, query, data).fetchall()
+            
+        return render_template('search_manager.j2', search=result)
+    return render_template('search_manager.j2')
+
 @app.route('/search_patient', methods=['GET', 'POST'])
 def search_patient():
     db_connection = db.connect_to_database()
@@ -68,6 +83,24 @@ def search_patient():
             
         return render_template('search_patient.j2', search=result)
     return render_template('search_patient.j2')
+
+@app.route('/search_office', methods=['GET', 'POST'])
+def search_office():
+    db_connection = db.connect_to_database()
+    if request.method == "POST":
+        office = request.form['office']
+        query = "SELECT office.id, office.name, office.phoneNumber, office.street, office.city, office.state, office.zip, manager.fname, manager.lname FROM office LEFT JOIN manager ON office.managerID = manager.id WHERE office.name LIKE %s;"
+        data = (office)
+        result = db.execute_query(db_connection, query, data).fetchall()
+        print(result)
+        
+        if len(data) == 0: 
+            query = "SELECT * FROM office;"
+            data = (office)
+            result = db.execute_query(db_connection, query, data).fetchall()
+            
+        return render_template('search_office.j2', search=result)
+    return render_template('search_office.j2')
 
 @app.route('/browse_assignment')
 def assignment():
