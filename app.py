@@ -300,8 +300,12 @@ def add_new_office():
         state = request.form['state']
         zipcode = request.form['zip']
         managerID = request.form['managerID']
-        query = 'INSERT INTO office (name, phoneNumber, street, city, state, zip, managerID) VALUES (%s,%s,%s,%s,%s,%s,%s);'
-        data = (name, phoneNumber, street, city, state, zipcode, managerID)
+        if managerID=='':
+            query = 'INSERT INTO office (name, phoneNumber, street, city, state, zip) VALUES (%s,%s,%s,%s,%s,%s);'
+            data = (name, phoneNumber, street, city, state, zipcode)
+        else:
+            query = 'INSERT INTO office (name, phoneNumber, street, city, state, zip, managerID) VALUES (%s,%s,%s,%s,%s,%s,%s);'
+            data = (name, phoneNumber, street, city, state, zipcode, managerID)
         db.execute_query(db_connection, query, data)
 
         query = "SELECT office.id, office.name, office.phoneNumber, office.street, office.city, office.state, office.zip, manager.fname, manager.lname FROM office LEFT JOIN manager ON office.managerID = manager.id;"
@@ -329,9 +333,12 @@ def update_office(id):
         state = request.form['state']
         zipco = request.form['zip']
         managerID = request.form['managerID']
-
-        query = "UPDATE office SET name = %s, phoneNumber = %s, street = %s, city = %s, state = %s, zip = %s, managerID = %s WHERE id = %s"
-        data = (name, phoneNumber, street, city, state, zipco, managerID, office_id)
+        if managerID == '':
+            query = "UPDATE office SET name = %s, phoneNumber = %s, street = %s, city = %s, state = %s, zip = %s, managerID = NULL WHERE id = %s"
+            data = (name, phoneNumber, street, city, state, zipco, office_id)
+        else:
+            query = "UPDATE office SET name = %s, phoneNumber = %s, street = %s, city = %s, state = %s, zip = %s, managerID = %s WHERE id = %s"
+            data = (name, phoneNumber, street, city, state, zipco, managerID, office_id)
         result = db.execute_query(db_connection, query, data)
         print(str(result.rowcount) + " row(s) updated")
         return redirect('/browse_office')
